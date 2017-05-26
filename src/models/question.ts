@@ -27,10 +27,10 @@ export class Question {
   
   
   private _questionText : string;
-  public get questionText() : string {
+  public get QuestionText() : string {
     return this._questionText;
   }
-  public set questionText(v : string) {
+  public set QuestionText(v : string) {
     this._questionText = v;
   }
   

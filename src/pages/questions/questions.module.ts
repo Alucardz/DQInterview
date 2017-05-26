@@ -1,3 +1,4 @@
+import { QuestionsProvider } from './../../providers/questions';
 import { CategoriesProvider } from './../../providers/categories';
 import { QuestionCreatePage } from './../question-create/question-create';
 import { QuestionDetailsPage } from './../question-details/question-details';
@@ -24,7 +25,8 @@ import { QuestionsPage } from './questions';
     QuestionCreatePage
   ],
   providers: [
-    CategoriesProvider
+    CategoriesProvider,
+    QuestionsProvider
   ]
 })
 export class QuestionsPageModule {}
