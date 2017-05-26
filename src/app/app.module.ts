@@ -1,3 +1,7 @@
+import { IonicToasterService } from './../utils/Logger/IonicToaster.log.service';
+import { Logger } from './../utils/Logger/ILogger';
+import { QuestionsPageModule } from './../pages/questions/questions.module';
+import { QuestionsProvider } from './../providers/questions';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http } from '@angular/http';
@@ -77,6 +81,7 @@ let pages = [
   TabsPage,
   TutorialPage,
   WelcomePage
+  //QuestionsPage
 ];
 
 export function declarations() {
@@ -91,12 +96,13 @@ export function providers() {
   return [
     Api,
     Items,
+    QuestionsProvider,
     User,
     Camera,
     GoogleMaps,
     SplashScreen,
     StatusBar,
-
+    { provide: Logger, useClass: IonicToasterService },
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
@@ -115,6 +121,7 @@ export function providers() {
         deps: [Http]
       }
     }),
+    QuestionsPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
