@@ -31,8 +31,8 @@ export class QuestionCreatePage {
     public viewCtrl: ViewController,
     public api: Api,
     public categService: CategoriesProvider,
-    public toastCtrl: Logger  
-    ) {
+    public toastCtrl: Logger
+  ) {
     this.form = formBuilder.group({
       questionText: ['', Validators.required],
       badAnswer: ['', Validators.required],
@@ -47,12 +47,8 @@ export class QuestionCreatePage {
       this.isReadyToSave = this.form.valid;
     });
 
-    this.categService.query()
-            .then(data => { 
-              this.categories = data;
-              this.toastCtrl.info();
-             }, 
-            err => this.toastCtrl.error(err));
+    this.categService.query().then(data => { this.categories = data; },
+      err => this.toastCtrl.error(err));
   }
 
   createQuestion() {

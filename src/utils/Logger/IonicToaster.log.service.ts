@@ -37,7 +37,7 @@ export class IonicToasterService implements ILogger {
     public info(...args: any[]): void {
         this.infoToast = this.tc.create({
             message: 'Success!',
-            duration: 30000,
+            duration: 3000,
             position: 'top',
             cssClass: 'info'
         });

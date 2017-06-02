@@ -16,59 +16,71 @@ export class Question {
     }
   }
 
-  
-  private _Id : string;
-  public get Id() : string {
+
+  private _Id: string;
+  public get Id(): string {
     return this._Id;
   }
-  public set Id(v : string) {
+  public set Id(v: string) {
     this._Id = v;
   }
-  
-  
-  private _questionText : string;
-  public get QuestionText() : string {
+
+
+  private _questionText: string;
+  public get QuestionText(): string {
     return this._questionText;
   }
-  public set QuestionText(v : string) {
+  public set QuestionText(v: string) {
     this._questionText = v;
   }
-  
-  
-  private _badAnswer : string;
-  public get badAnswer() : string {
+
+
+  private _badAnswer: string;
+  public get badAnswer(): string {
     return this._badAnswer;
   }
-  public set badAnswer(v : string) {
+  public set badAnswer(v: string) {
     this._badAnswer = v;
   }
-  
-  
-  private _neutralAnswer : string;
-  public get neutralAnswer() : string {
+
+
+  private _neutralAnswer: string;
+  public get neutralAnswer(): string {
     return this._neutralAnswer;
   }
-  public set neutralAnswer(v : string) {
+  public set neutralAnswer(v: string) {
     this._neutralAnswer = v;
   }
-  
-  
-  private _goodAnswer : string;
-  public get goodAnswer() : string {
+
+
+  private _goodAnswer: string;
+  public get goodAnswer(): string {
     return this._goodAnswer;
   }
-  public set goodAnswer(v : string) {
+  public set goodAnswer(v: string) {
     this._goodAnswer = v;
   }
-  
-  
-  private _excellentAnswer : string;
-  public get excellentAnswer() : string {
+
+
+  private _excellentAnswer: string;
+  public get excellentAnswer(): string {
     return this._excellentAnswer;
   }
-  public set excellentAnswer(v : string) {
+  public set excellentAnswer(v: string) {
     this._excellentAnswer = v;
   }
+
+   
+  private _Comment : string;
+  public get Comment() : string {
+    return this._Comment;
+  }
+  public set Comment(v : string) {
+    this._Comment = v;
+  }
+  
   
 
+
 }
+

@@ -21,32 +21,38 @@ export class QuestionsPage {
   currentQuestions: Question[];
 
   constructor(public navCtrl: NavController,
-              public questions: QuestionsProvider,
+              public questService: QuestionsProvider,
               public navParams: NavParams,
               public modalCtrl: ModalController,
               public toastCtrl: Logger
               ) {
-    questions.query().then(data => {
-      this.currentQuestions = data;
-    });
+    this.updateQuestionsList();
   }
 
   openItem(q: Question) {
     this.navCtrl.push(QuestionDetailsPage, {
       q: q
-    });
+    }).then( val =>
+      this.updateQuestionsList()
+    );
   }
 
   addQuestion() {
     let addModal = this.modalCtrl.create(QuestionCreatePage);
     addModal.onDidDismiss(item => {
       if (item) {
-        this.questions.addQuestion(item).subscribe(
+        this.questService.addQuestion(item).subscribe(
                        q  => this.currentQuestions.push(q),
                        error =>  this.toastCtrl.error(error));;
       }
     })
     addModal.present();
+  }
+
+  updateQuestionsList() {
+    this.questService.query().then(data => {
+      this.currentQuestions = data;
+    });    
   }
 
   ionViewDidLoad() {

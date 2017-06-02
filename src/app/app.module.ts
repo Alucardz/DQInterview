@@ -1,3 +1,4 @@
+import { InterviewPageModule } from './../pages/interview/interview.module';
 import { IonicToasterService } from './../utils/Logger/IonicToaster.log.service';
 import { Logger } from './../utils/Logger/ILogger';
 import { QuestionsPageModule } from './../pages/questions/questions.module';
@@ -120,6 +121,7 @@ export function providers() {
       }
     }),
     QuestionsPageModule,
+    InterviewPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
