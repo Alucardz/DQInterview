@@ -1,10 +1,10 @@
 export class QuestionCategory {
     
-    private _Id : string;
-    public get Id() : string {
+    private _Id : number;
+    public get Id() : number {
         return this._Id;
     }
-    public set Id(v : string) {
+    public set Id(v : number) {
         this._Id = v;
     }
 

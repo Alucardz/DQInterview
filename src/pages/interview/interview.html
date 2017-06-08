@@ -19,38 +19,12 @@
       {{currQ?.QuestionText}}
     </ion-card-header>
     <ion-list>
-      <button ion-item (click)="toggleComment(0)">
-      <ion-icon name="sad" item-left ></ion-icon>
-        {{currQ?.badAnswer}}
-      </button>
-      <ion-item *ngIf="commentStates[this.currentQuestionIndex][0]">
-        <ion-input type="text"></ion-input>
-      </ion-item>
 
-      <button ion-item (click)="toggleComment(1)">
-      <ion-icon name="cart" item-left ></ion-icon>
-        {{currQ?.neutralAnswer}}
-      </button>
-      <ion-item *ngIf="commentStates[this.currentQuestionIndex][1]">
-        <ion-input type="text"></ion-input>
-      </ion-item>
+      <span *ngFor="let ans of currQ?.AllAnswers; let i = index"  >
+        <interview-answer #AnswersContainer [(selectedAnswer)]="answerList[currentQuestionIndex]" [answerText]="ans" [answerIndex]="i">
 
-      <button ion-item (click)="toggleComment(2)">
-      <ion-icon name="cart" item-left ></ion-icon>
-        {{currQ?.goodAnswer}}
-      </button>
-      <ion-item *ngIf="commentStates[this.currentQuestionIndex][2]">
-        <ion-input type="text"></ion-input>
-      </ion-item>
-
-      <button ion-item (click)="toggleComment(3)">
-      <ion-icon name="cart" item-left ></ion-icon>
-        {{currQ?.excellentAnswer}}              
-      </button>
-      <ion-item *ngIf="commentStates[this.currentQuestionIndex][3]">
-        <ion-input type="text"></ion-input>
-      </ion-item>
-
+        </interview-answer>
+      </span>
     </ion-list>
   </ion-card>
 

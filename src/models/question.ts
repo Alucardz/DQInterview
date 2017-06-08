@@ -1,3 +1,7 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/combineLatest';
 /**
  * A generic model that our Master-Detail pages list, create, and delete.
  *
@@ -14,14 +18,22 @@ export class Question {
     for (let f in fields) {
       this[f] = fields[f];
     }
+
+    // Observable.combineLatest(this._badAnswer,this._neutralAnswer,this._goodAnswer,this._excellentAnswer).do(
+    //   values => {
+    //     debugger;
+    //     this.AllAnswers = values
+    //   }
+    // )
+    this.AllAnswers = [this._badAnswer,this._neutralAnswer,this._goodAnswer,this._excellentAnswer]
   }
 
 
-  private _Id: string;
-  public get Id(): string {
+  private _Id: number;
+  public get Id(): number {
     return this._Id;
   }
-  public set Id(v: string) {
+  public set Id(v: number) {
     this._Id = v;
   }
 
@@ -69,7 +81,10 @@ export class Question {
   public set excellentAnswer(v: string) {
     this._excellentAnswer = v;
   }
+  
+   
 
+  public  AllAnswers: string[];
    
   private _Comment : string;
   public get Comment() : string {
