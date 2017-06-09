@@ -1,7 +1,6 @@
+import { TextInput } from 'ionic-angular';
 import { Answer } from './../../../models/answer';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { Subject } from "rxjs/Subject";
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ViewChildren, QueryList, ViewContainerRef } from '@angular/core';
 
 /**
  * Generated class for the InterviewAnswerComponent component.
@@ -17,7 +16,7 @@ import { Subject } from "rxjs/Subject";
         {{answerText}}
       </button>
       <ion-item *ngIf="answerIndex == selectedAnswer?.AnswerIndex">
-        <ion-input type="text" (ngModelChange)="selectedAnswer.Comment = $event" [ngModel]="selectedAnswer?.Comment"></ion-input>
+        <ion-input #comment type="text" (ngModelChange)="selectedAnswer.Comment = $event" [ngModel]="selectedAnswer?.Comment"></ion-input>
       </ion-item>
   `
 })
@@ -26,7 +25,21 @@ export class InterviewAnswerComponent {
   @Input() answerText: string;
   @Input() selectedAnswer: Answer;
   @Output() commentChange: EventEmitter<String> = new EventEmitter<String>();
+
+  Txt_Comment: ElementRef;
+
+  @ViewChildren('comment') set content(comments: QueryList<ElementRef>) {
+    debugger;
+    if (comments.length > 0) {
+      comments.toArray()[0].nativeElement?.focus();
+    }
+  }
+
   constructor() {
+
+  }
+
+  ngAfterViewInit() {
 
   }
 
@@ -34,6 +47,7 @@ export class InterviewAnswerComponent {
     if (this.selectedAnswer.AnswerIndex != this.answerIndex) {
       this.selectedAnswer.Comment = "";
       this.selectedAnswer.AnswerIndex = this.answerIndex;
+      //this.Txt_Comment[this.selectedAnswer.AnswerIndex].nativeElement.focus()
     }
   }
 }

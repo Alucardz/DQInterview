@@ -1,9 +1,10 @@
+import { JobTitle } from './../../models/jobTitle';
+import { jobTitlesProvider } from './../../providers/jobTitles';
 import { Answer } from './../../models/answer';
-import { InterviewAnswerComponent } from './components/interview-answer';
 import { InterviewsProvider } from './../../providers/interviews';
 import { Interview } from './../../models/interview';
 import { Question } from './../../models/question';
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -22,11 +23,8 @@ export class InterviewPage {
   currentQuestionIndex: number = 0;
   questionList: Question[];
   answerList: Answer[] = [];
+  jobTitles: JobTitle[] = [];
   currQ: Question;
-  currA: Answer = new Answer({});
-
-  answerToggleStates: boolean[] = [];
-
   InterviewObj: Interview;
 
   //@ViewChildren('AnswersContainer')
@@ -35,7 +33,12 @@ export class InterviewPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public InterviewService: InterviewsProvider) {
+    public InterviewService: InterviewsProvider,
+    public JobTitlesService: jobTitlesProvider) {
+
+    JobTitlesService.query().then(jobTitles => {
+      this.jobTitles = jobTitles;
+    })
 
     //todo: replace 1 with jobOpening (from combo?)
     InterviewService.GetQuestions(1).then(data => {
@@ -47,13 +50,9 @@ export class InterviewPage {
           this.answerList.push(new Answer({}));
         });
       }
-    }
-    );
-  } 
-  onCommentChange(comment) {
-    debugger;
-    console.log(comment);
-    this.answerList[this.currentQuestionIndex].Comment = comment;
+    });
+
+
   }
   ionViewDidLoad() {
 

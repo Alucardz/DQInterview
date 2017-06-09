@@ -19,8 +19,14 @@
       {{currQ?.QuestionText}}
     </ion-card-header>
     <ion-list>
+      <ion-item>
+        <ion-label>Which Position is the Applicant applying to?</ion-label>
+        <ion-select interface="popover">
+          <ion-option *ngFor="let j of jobTitles" [value]="j">{{j}}</ion-option>
+        </ion-select>
+      </ion-item>
 
-      <span *ngFor="let ans of currQ?.AllAnswers; let i = index"  >
+      <span *ngFor="let ans of currQ?.AllAnswers; let i = index">
         <interview-answer #AnswersContainer [(selectedAnswer)]="answerList[currentQuestionIndex]" [answerText]="ans" [answerIndex]="i">
 
         </interview-answer>

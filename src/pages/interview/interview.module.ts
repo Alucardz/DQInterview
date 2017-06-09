@@ -1,3 +1,4 @@
+import { jobTitlesProvider } from './../../providers/jobTitles';
 import { InterviewAnswerComponent } from './components/interview-answer';
 import { InterviewsProvider } from './../../providers/interviews';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,6 @@ import { InterviewPage } from './interview';
   exports: [
     InterviewPage
   ],
-  providers: [InterviewsProvider]
+  providers: [InterviewsProvider, jobTitlesProvider]
 })
 export class InterviewPageModule {}
