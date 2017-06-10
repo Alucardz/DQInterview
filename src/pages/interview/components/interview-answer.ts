@@ -28,10 +28,10 @@ export class InterviewAnswerComponent {
 
   Txt_Comment: ElementRef;
 
-  @ViewChildren('comment') set content(comments: QueryList<ElementRef>) {
+  @ViewChildren('comment', { read: ElementRef }) set content(comments: QueryList<ElementRef>) {
     debugger;
-    if (comments.length > 0) {
-      comments.toArray()[0].nativeElement?.focus();
+    if (comments.length > 0) {      
+      comments.first.nativeElement.querySelector('input').focus();      
     }
   }
 

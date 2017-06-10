@@ -9,7 +9,13 @@ import { Api } from './api';
 @Injectable()
 export class InterviewsProvider {
     interview: Interview;
-    questions: Question[] = [];
+    questions: Question[] = [new Question({
+        QuestionText: "123",
+        badAnswer: "b 123 123",
+        neutralAnswer: "n 123 123",
+        goodAnswer: "g 123 123",
+        excellentAnswer: "e 123 123"
+    })];
     private endPoint: string = 'Interviews';
 
     constructor(public http: Http, public api: Api) {
@@ -17,6 +23,7 @@ export class InterviewsProvider {
     }
 
     query(params?: any): Promise<Interview> {
+
         return new Promise(resolve => {
             this.api.get('/' + this.endPoint, params)
                 .map(res => res.json())
@@ -28,6 +35,9 @@ export class InterviewsProvider {
     }
 
     GetQuestions(jobOpeningId: number): Promise<Question[]> {
+        if (this.questions.length > 0) {
+            return new Promise(resolve => resolve(this.questions))
+        }   
         return new Promise(resolve => {
             this.api.get(this.endPoint + '/Questions/' + jobOpeningId)
                 .map(res => <Question[]>res.json())
