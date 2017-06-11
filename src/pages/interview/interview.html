@@ -13,10 +13,10 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="content">
   <ion-card>
     <ion-card-header>
-      {{currQ?.QuestionText}}
+      <h1>{{currQ?.QuestionText}}</h1>      
     </ion-card-header>
     <ion-list>
       <ion-item>
@@ -26,11 +26,11 @@
         </ion-select>
       </ion-item>
 
-      <span *ngFor="let ans of currQ?.AllAnswers; let i = index">
+      <ion-item *ngFor="let ans of currQ?.AllAnswers; let i = index">
         <interview-answer #AnswersContainer [(selectedAnswer)]="answerList[currentQuestionIndex]" [answerText]="ans" [answerIndex]="i">
 
         </interview-answer>
-      </span>
+      </ion-item>
     </ion-list>
   </ion-card>
 
