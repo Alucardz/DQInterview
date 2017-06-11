@@ -16,7 +16,7 @@
 <ion-content padding class="content">
   <ion-card>
     <ion-card-header>
-      <h1>{{currQ?.QuestionText}}</h1>      
+      <h1>{{currQ?.QuestionText}}</h1>
     </ion-card-header>
     <ion-list>
       <ion-item>
@@ -25,12 +25,13 @@
           <ion-option *ngFor="let j of jobTitles" [value]="j">{{j}}</ion-option>
         </ion-select>
       </ion-item>
+      <ion-slides >
+        <ion-slide *ngFor="let ans of currQ?.AllAnswers; let i = index">
+          <interview-answer #AnswersContainer [(selectedAnswer)]="answerList[currentQuestionIndex]" [answerText]="ans" [answerIndex]="i">
 
-      <ion-item *ngFor="let ans of currQ?.AllAnswers; let i = index">
-        <interview-answer #AnswersContainer [(selectedAnswer)]="answerList[currentQuestionIndex]" [answerText]="ans" [answerIndex]="i">
-
-        </interview-answer>
-      </ion-item>
+          </interview-answer>
+        </ion-slide>
+      </ion-slides>
     </ion-list>
   </ion-card>
 

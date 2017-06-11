@@ -15,6 +15,20 @@ export class InterviewsProvider {
         neutralAnswer: "n 123 123",
         goodAnswer: "g 123 123",
         excellentAnswer: "e 123 123"
+    }), 
+    new Question({
+        QuestionText: "222",
+        badAnswer: "b 22222",
+        neutralAnswer: "n 2222",
+        goodAnswer: "g 2222",
+        excellentAnswer: "e 2222"
+    }), 
+    new Question({
+        QuestionText: "123",
+        badAnswer: "b 3333",
+        neutralAnswer: "n 3333",
+        goodAnswer: "g 33333",
+        excellentAnswer: "e 33333"
     })];
     private endPoint: string = 'Interviews';
 
