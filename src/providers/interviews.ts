@@ -49,9 +49,9 @@ export class InterviewsProvider {
     }
 
     GetQuestions(jobOpeningId: number): Promise<Question[]> {
-        if (this.questions.length > 0) {
-            return new Promise(resolve => resolve(this.questions))
-        }   
+        // if (this.questions.length > 0) {
+        //     return new Promise(resolve => resolve(this.questions))
+        // }   
         return new Promise(resolve => {
             this.api.get(this.endPoint + '/Questions/' + jobOpeningId)
                 .map(res => <Question[]>res.json())

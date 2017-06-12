@@ -5,41 +5,32 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>interview</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding class="content">
-  <ion-slides>
+  <ion-item>
+    <ion-label>Which Position is the Applicant applying to?</ion-label>
+    <ion-select [(ngModel)]="selectedJobtitle">
+      <ion-option *ngFor="let j of jobTitles" [value]="j">{{j}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-slides *ngIf="questionList.length > 0" #slides pager paginationType="progress">
     <ion-slide *ngFor="let q of questionList; let qi = index">
-
       <ion-card>
         <ion-card-header>
           <h1>{{q?.QuestionText}}</h1>
         </ion-card-header>
         <ion-list>
-          <ion-item>
-            <ion-label>Which Position is the Applicant applying to?</ion-label>
-            <ion-select interface="popover">
-              <ion-option *ngFor="let j of jobTitles" [value]="j">{{j}}</ion-option>
-            </ion-select>
-          </ion-item>
           <ion-item *ngFor="let ans of q?.AllAnswers; let i = index">
             <interview-answer #AnswersContainer [(selectedAnswer)]="answerList[qi]" [answerText]="ans" [answerIndex]="i">
-
             </interview-answer>
           </ion-item>
         </ion-list>
       </ion-card>
-
     </ion-slide>
   </ion-slides>
-
-
-  <button ion-button color="secondary" round (click)="Prev()" [disabled]="currentQuestionIndex == 0">Prev Question</button>
-  <button ion-button color="secondary" round (click)="Next()" [disabled]="currentQuestionIndex == (questionList?.length - 1)">Next Question</button>
+  <!--<button ion-button color="secondary" round (click)="Prev()" [disabled]="currentQuestionIndex == 0">Prev Question</button>
+  <button ion-button color="secondary" round (click)="Next()" [disabled]="currentQuestionIndex == (questionList?.length - 1)">Next Question</button>-->
 </ion-content>

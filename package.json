@@ -20,6 +20,7 @@
     "@angular/http": "4.1.0",
     "@angular/platform-browser": "4.1.0",
     "@angular/platform-browser-dynamic": "4.1.0",
+    "@angular/animations": "4.1.0",
     "@ionic-native/camera": "^3.9.2",
     "@ionic-native/core": "3.7.0",
     "@ionic-native/firebase": "^3.10.0",

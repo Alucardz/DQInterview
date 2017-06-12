@@ -4,6 +4,7 @@ import { InterviewsProvider } from './../../providers/interviews';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { InterviewPage } from './interview';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { InterviewPage } from './interview';
   ],
   imports: [
     IonicPageModule.forChild(InterviewPage),
+    BrowserAnimationsModule
   ],
   exports: [
     InterviewPage
