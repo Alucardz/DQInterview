@@ -14,26 +14,31 @@
 
 
 <ion-content padding class="content">
-  <ion-card>
-    <ion-card-header>
-      <h1>{{currQ?.QuestionText}}</h1>
-    </ion-card-header>
-    <ion-list>
-      <ion-item>
-        <ion-label>Which Position is the Applicant applying to?</ion-label>
-        <ion-select interface="popover">
-          <ion-option *ngFor="let j of jobTitles" [value]="j">{{j}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-slides >
-        <ion-slide *ngFor="let ans of currQ?.AllAnswers; let i = index">
-          <interview-answer #AnswersContainer [(selectedAnswer)]="answerList[currentQuestionIndex]" [answerText]="ans" [answerIndex]="i">
+  <ion-slides>
+    <ion-slide *ngFor="let q of questionList; let qi = index">
 
-          </interview-answer>
-        </ion-slide>
-      </ion-slides>
-    </ion-list>
-  </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <h1>{{q?.QuestionText}}</h1>
+        </ion-card-header>
+        <ion-list>
+          <ion-item>
+            <ion-label>Which Position is the Applicant applying to?</ion-label>
+            <ion-select interface="popover">
+              <ion-option *ngFor="let j of jobTitles" [value]="j">{{j}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngFor="let ans of q?.AllAnswers; let i = index">
+            <interview-answer #AnswersContainer [(selectedAnswer)]="answerList[qi]" [answerText]="ans" [answerIndex]="i">
+
+            </interview-answer>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+
+    </ion-slide>
+  </ion-slides>
+
 
   <button ion-button color="secondary" round (click)="Prev()" [disabled]="currentQuestionIndex == 0">Prev Question</button>
   <button ion-button color="secondary" round (click)="Next()" [disabled]="currentQuestionIndex == (questionList?.length - 1)">Next Question</button>
