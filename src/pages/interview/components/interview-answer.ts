@@ -13,55 +13,66 @@ import { Component, Input, Output, EventEmitter, ElementRef, ViewChildren, Query
 @Component({
   selector: 'interview-answer',
   template: `
-      <button class="round-button" [@answerState]="(answerIndex == selectedAnswer?.AnswerIndex?'active':'inactive')" ion-item (click)="toggleComment(comment)">
+      <button class="round-button" [@answerState]="(answerIndex == selectedAnswer?.AnswerIndex?'active':'inactive')" ion-item (click)="toggleComment(comment)" style="width: 98%">
         <ion-icon [name]="icons[answerIndex]" item-left ></ion-icon>
           {{answerText}}
       </button>
-      <ion-item [@commentState]="(answerIndex == selectedAnswer?.AnswerIndex?'active':'inactive')" *ngIf="answerIndex == selectedAnswer?.AnswerIndex" >
+      <ion-item style="width: 98%" [@commentState]="(answerIndex == selectedAnswer?.AnswerIndex?'active':'inactive')" *ngIf="answerIndex == selectedAnswer?.AnswerIndex" > 
         <ion-textarea  #comment type="text" (ngModelChange)="selectedAnswer.Comment = $event" [ngModel]="selectedAnswer?.Comment" clearInput></ion-textarea>
       </ion-item>
   `, animations: [
-   trigger('answerState', [
-     state('inactive', style({
-       backgroundColor: '#eee',
-       transform: 'scale(.95)',
-       'border-radius': '30px 30px 30px 30px'
-     })),
-     state('active',   style({
-       backgroundColor: '#cfd8dc',
-       transform: 'scale(1)',
-       'font-size': '2em',
-       'border-radius': '30px 30px 0px 0px'
-     })),
-     transition('inactive <=> active', animate('500ms ease-out'))
-   ]),
-   trigger('commentState', [
-     state('inactive', style({
-       backgroundColor: '#eee',
-       transform: 'scale(.95)',
-       'border-radius': '30px 30px 30px 30px'
-     })),
-     state('active',   style({
-       backgroundColor: '#cfd8dc',
-       transform: 'scale(1)',
-       'font-size': '2em',
-       'border-radius': '0px 0px 30px 30px'       
-     })),
-     transition('inactive <=> active', animate('500ms ease-out'))
-   ])
- ]
+    trigger('answerState', [
+      state('inactive', style({
+        backgroundColor: '#eee',
+        transform: 'scale(.95)',
+        'border-radius': '30px 30px 30px 30px'
+      })),
+      state('active', style({
+        backgroundColor: '#cfd8dc',
+        transform: 'scale(1)',
+        'font-size': '1.8em',
+        'border-radius': '30px 30px 0px 0px',
+        'box-shadow': '10px -10px 10px #888888',
+        'margin-top': '20px'
+      })),
+      transition('inactive <=> active', animate('500ms ease-out')),
+    ]),
+    trigger('commentState', [
+      state('inactive', style({
+        backgroundColor: '#eee',
+        transform: 'scale(.95)',
+        'border-radius': '30px 30px 30px 30px',
+        'height':'0px'
+      })),
+      state('active', style({
+        backgroundColor: '#cfd8dc',
+        transform: 'scale(1)',
+        'font-size': '2em',
+        'border-radius': '0px 0px 30px 30px',
+        'box-shadow': '10px -10px 10px #888888',
+        'margin-right': '20px',
+        'z-index': '-1'
+      })),
+      transition('inactive <=> active', animate('500ms ease-out')),
+      transition('inactive <=> active', [
+        style({ height: '*' }),
+        animate(250, style({ height: 0 }))
+      ])
+    ])
+  ]
 })
+//<!--  -->
 export class InterviewAnswerComponent {
-  @Input() answerIndex:  number;
+  @Input() answerIndex: number;
   @Input() answerText: string;
   @Input() selectedAnswer: Answer;
   @Output() commentChange: EventEmitter<String> = new EventEmitter<String>();
 
   // answerState: Observable<string> = Observable.combineLatest(this.answerText, this.selectedAnswer)
   // .map(values => (values[0] === values[1].AnswerIndex?'':''))
-                   
-                  
-  icons: string[] = ['thumbs-down','thumbs-up','happy','ribbon']
+
+
+  icons: string[] = ['thumbs-down', 'thumbs-up', 'happy', 'ribbon']
   Txt_Comment: ElementRef;
 
   //
@@ -81,7 +92,7 @@ export class InterviewAnswerComponent {
     debugger;
     if (this.selectedAnswer.AnswerIndex != this.answerIndex) {
       this.selectedAnswer.Comment = "";
-      this.selectedAnswer.AnswerIndex = this.answerIndex;      
+      this.selectedAnswer.AnswerIndex = this.answerIndex;
     }
     else {
       if (this.Txt_Comment) {

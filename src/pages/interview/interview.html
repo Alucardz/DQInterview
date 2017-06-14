@@ -16,7 +16,7 @@
       <ion-option *ngFor="let j of jobTitles" [value]="j">{{j}}</ion-option>
     </ion-select>
   </ion-item>
-  <ion-slides *ngIf="questionList.length > 0" #slides pager paginationType="progress">
+  <ion-slides (ionSlideNextStart)="beforeNextSlide($event)" *ngIf="questionList.length > 0" #slides pager paginationType="progress">
     <ion-slide *ngFor="let q of questionList; let qi = index">
       <ion-card>
         <ion-card-header>

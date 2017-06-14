@@ -76,6 +76,12 @@ export class User {
     return seq;
   }
 
+  
+  
+  public get User() : User {
+    return this._user;
+  }
+  
   /**
    * Log the user out, which forgets the session
    */

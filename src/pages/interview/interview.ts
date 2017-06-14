@@ -30,7 +30,7 @@ export class InterviewPage {
   public set selectedJobtitle(v: string) {
     debugger;
     this._selectedJobtitle = v;
-    
+
     let loading = this.loadingCtrl.create({
       content: 'Loading Questions...'
     });
@@ -75,6 +75,13 @@ export class InterviewPage {
   ionViewDidLoad() {
 
   }
+
+  beforeNextSlide(args: any) {
+    debugger;
+    return false;
+  }
+
+  
 
   ngAfterViewInit() {
     debugger;
