@@ -13,7 +13,7 @@ import { QuestionsPage } from './questions';
     QuestionCreatePage
   ],
   imports: [
-    IonicPageModule.forChild(QuestionsPage),
+    IonicPageModule.forChild(QuestionsPage)
   ],
   exports: [
     QuestionsPage,

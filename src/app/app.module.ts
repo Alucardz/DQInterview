@@ -1,12 +1,14 @@
-import { InterviewPageModule } from './../pages/interview/interview.module';
+
+//import { InterviewPageModule } from './../pages/interview/interview.module';
 import { IonicToasterService } from './../utils/Logger/IonicToaster.log.service';
 import { Logger } from './../utils/Logger/ILogger';
-import { QuestionsPageModule } from './../pages/questions/questions.module';
+//import { QuestionsPageModule } from './../pages/questions/questions.module';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage, IonicStorageModule } from '@ionic/storage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MyApp } from './app.component';
 
@@ -14,6 +16,7 @@ import { LoginPage } from '../pages/login/login';
 import { SettingsPage } from '../pages/settings/settings';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
+import { WelcomePage } from './../pages/welcome/welcome';
 
 import { Api } from '../providers/api';
 import { Items } from '../mocks/providers/items';
@@ -60,7 +63,8 @@ let pages = [
   LoginPage,
   SettingsPage,
   SignupPage,
-  TabsPage
+  TabsPage,
+  WelcomePage
   //QuestionsPage
 ];
 
@@ -89,7 +93,15 @@ export function providers() {
 }
 
 @NgModule({
-  declarations: declarations(),
+  declarations: [
+    MyApp,
+    LoginPage,
+    SettingsPage,
+    SignupPage,
+    TabsPage,
+    WelcomePage
+    //QuestionsPage
+  ],
   imports: [
     BrowserModule,
     HttpModule,
@@ -100,13 +112,22 @@ export function providers() {
         deps: [Http]
       }
     }),
-    QuestionsPageModule,
-    InterviewPageModule,
+    BrowserAnimationsModule,
+    // QuestionsPageModule,
+    // InterviewPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
-  entryComponents: entryComponents(),
+  entryComponents: [
+    MyApp,
+    LoginPage,
+    SettingsPage,
+    SignupPage,
+    TabsPage,
+    WelcomePage
+    //QuestionsPage
+  ],
   providers: providers()
 })
 export class AppModule { }

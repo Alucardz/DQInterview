@@ -28,8 +28,8 @@ import { TranslateService } from '@ngx-translate/core'
   </ion-menu>
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
-export class MyApp {
-  rootPage = FirstRunPage;
+export class MyApp  {
+  rootPage: any = FirstRunPage;
 
   @ViewChild(Nav) nav: Nav;
 
@@ -39,7 +39,7 @@ export class MyApp {
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, statusBar: StatusBar, splashScreen: SplashScreen) {
-
+    debugger;
     this.initTranslate();
 
     platform.ready().then(() => {
@@ -49,6 +49,7 @@ export class MyApp {
       splashScreen.hide();
     });
   }
+
 
   initTranslate() {
     // Set the default language for translation strings, and the current language.

@@ -16,7 +16,9 @@ import { SignupPage } from '../signup/signup';
 })
 export class WelcomePage {
 
-  constructor(public navCtrl: NavController) { }
+  constructor(public navCtrl: NavController) { 
+    console.log('welcolme loaded!')
+  }
 
   login() {
     this.navCtrl.push(LoginPage);

@@ -5,7 +5,7 @@ import { QuestionCategory } from './../../models/questionCategory';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Question } from './../../models/question';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angular';
 
 /**
  * Generated class for the QuestionCreatePage page.
@@ -13,7 +13,7 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
+@IonicPage()
 @Component({
   selector: 'page-question-create',
   templateUrl: 'question-create.html',
