@@ -13,7 +13,7 @@ import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angul
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-question-create',
   templateUrl: 'question-create.html',

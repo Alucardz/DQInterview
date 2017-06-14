@@ -4,8 +4,8 @@
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
   "private": true,
-  "config": { 
-    "ionic_webpack":"./webpack.config.js"
+  "config": {
+    "ionic_webpack": "./webpack.config.js"
   },
   "scripts": {
     "clean": "ionic-app-scripts clean",
