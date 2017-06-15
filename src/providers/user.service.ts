@@ -1,8 +1,11 @@
+import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Api } from './api';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from "rxjs/Observable";
+import { Subject } from "rxjs/Subject";
 
 /**
  * Most apps have the concept of a User. This is a simple provider
@@ -24,8 +27,8 @@ import 'rxjs/add/operator/toPromise';
  * If the `status` field is not `success`, then an error is detected and returned.
  */
 @Injectable()
-export class User {
-  _user: any;
+export class UserService {
+  private _user: Subject<User> = new Subject<User>();
 
   constructor(public http: Http, public api: Api) {
   }
@@ -78,21 +81,21 @@ export class User {
 
   
   
-  public get User() : User {
-    return this._user;
+  public get User() : Observable<User> {
+    return this._user.asObservable();
   }
   
   /**
    * Log the user out, which forgets the session
    */
   logout() {
-    this._user = null;
+    this._user.next(null);
   }
 
   /**
    * Process a login/signup response to store user data
    */
   _loggedIn(resp) {
-    this._user = resp.user;
+    this._user.next(new User({ DisplayName: resp.user.displayname, Email: resp.user.email }));
   }
 }

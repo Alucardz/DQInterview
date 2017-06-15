@@ -7,7 +7,7 @@ import { Http, Response } from '@angular/http';
 import { Api } from './api';
 
 @Injectable()
-export class InterviewsProvider {
+export class InterviewService {
     interview: Interview;
     questions: Question[] = [new Question({
         QuestionText: "123",
@@ -15,14 +15,14 @@ export class InterviewsProvider {
         neutralAnswer: "n 123 123",
         goodAnswer: "g 123 123",
         excellentAnswer: "e 123 123"
-    }), 
+    }),
     new Question({
         QuestionText: "222",
         badAnswer: "b 22222",
         neutralAnswer: "n 2222",
         goodAnswer: "g 2222",
         excellentAnswer: "e 2222"
-    }), 
+    }),
     new Question({
         QuestionText: "123",
         badAnswer: "b 3333",
@@ -48,6 +48,16 @@ export class InterviewsProvider {
         });
     }
 
+    // GetQuestions2(jobOpeningId: number): Observable<Question[]> {
+    //     return this.api.get(this.endPoint + '/Questions/' + jobOpeningId)
+    //             .map(res =>  { <Question[]>res.json())
+    //             .subscribe(data => {
+    //                 data.forEach(e => this.questions.push(new Question(e)));
+    //             }, error => {
+    //                 Observable.throw(error)
+    //             });
+    // }
+
     GetQuestions(jobOpeningId: number): Promise<Question[]> {
         // if (this.questions.length > 0) {
         //     return new Promise(resolve => resolve(this.questions))
@@ -58,6 +68,8 @@ export class InterviewsProvider {
                 .subscribe(data => {
                     data.forEach(e => this.questions.push(new Question(e)));
                     resolve(this.questions);
+                }, error => {
+                    Observable.throw(error)
                 });
         });
     }

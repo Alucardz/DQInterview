@@ -1,3 +1,6 @@
+import { UserService } from './../providers/user.service';
+import { QuestionCreatePage } from './../pages/question-create/question-create';
+import { QuestionDetailsPage } from './../pages/question-details/question-details';
 
 //import { InterviewPageModule } from './../pages/interview/interview.module';
 import { IonicToasterService } from './../utils/Logger/IonicToaster.log.service';
@@ -21,7 +24,6 @@ import { WelcomePage } from './../pages/welcome/welcome';
 import { Api } from '../providers/api';
 import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/settings';
-import { User } from '../providers/user';
 
 import { Camera } from '@ionic-native/camera';
 import { GoogleMaps } from '@ionic-native/google-maps';
@@ -64,7 +66,9 @@ let pages = [
   SettingsPage,
   SignupPage,
   TabsPage,
-  WelcomePage
+  WelcomePage,
+  QuestionDetailsPage,
+  QuestionCreatePage
   //QuestionsPage
 ];
 
@@ -80,7 +84,7 @@ export function providers() {
   return [
     Api,
     Items,
-    User,
+    UserService,
     Camera,
     GoogleMaps,
     SplashScreen,
@@ -99,7 +103,9 @@ export function providers() {
     SettingsPage,
     SignupPage,
     TabsPage,
-    WelcomePage
+    WelcomePage,
+    QuestionDetailsPage,
+    QuestionCreatePage
     //QuestionsPage
   ],
   imports: [
@@ -125,7 +131,9 @@ export function providers() {
     SettingsPage,
     SignupPage,
     TabsPage,
-    WelcomePage
+    WelcomePage,
+    QuestionDetailsPage,
+    QuestionCreatePage
     //QuestionsPage
   ],
   providers: providers()

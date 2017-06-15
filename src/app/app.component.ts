@@ -1,3 +1,5 @@
+import { User } from './../models/user.model';
+import { UserService } from './../providers/user.service';
 import { InterviewPage } from './../pages/interview/interview';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, Config } from 'ionic-angular';
@@ -9,15 +11,24 @@ import { QuestionsPage } from '../pages/questions/questions';
 import { Settings } from '../providers/providers';
 import { TranslateService } from '@ngx-translate/core'
 
+// <ion-toolbar>
+//   <ion-title>Pages</ion-title>
+// </ion-toolbar>
 @Component({
   template: `<ion-menu [content]="content">
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Pages</ion-title>
-      </ion-toolbar>
+      <ion-item>
+        <ion-avatar item-start>
+          <img style="border-radius: 75%" src="assets/img/avatar.gif">
+        </ion-avatar>
+        <h2>{{loggedInUser?.DisplayName}}</h2>
+        <p>{{loggedInUser?.Email}}</p>
+        <ion-note item-end>3:43 pm</ion-note>
+      </ion-item>
     </ion-header>
 
     <ion-content>
+      
       <ion-list>
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
@@ -28,8 +39,9 @@ import { TranslateService } from '@ngx-translate/core'
   </ion-menu>
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
-export class MyApp  {
+export class MyApp {
   rootPage: any = FirstRunPage;
+  loggedInUser: User;
 
   @ViewChild(Nav) nav: Nav;
 
@@ -38,8 +50,16 @@ export class MyApp  {
     { title: 'Interview', component: InterviewPage }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, statusBar: StatusBar, splashScreen: SplashScreen) {
-    debugger;
+  constructor(private translate: TranslateService, 
+                      platform: Platform, 
+                      settings: Settings, 
+                      private config: Config, 
+                      statusBar: StatusBar, 
+                      splashScreen: SplashScreen,
+                      userSvc: UserService) {
+
+    
+    userSvc.User.subscribe(u => this.loggedInUser = u);
     this.initTranslate();
 
     platform.ready().then(() => {

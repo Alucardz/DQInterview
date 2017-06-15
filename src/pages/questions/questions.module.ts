@@ -8,21 +8,16 @@ import { QuestionsPage } from './questions';
 
 @NgModule({
   declarations: [
-    QuestionsPage,
-    QuestionDetailsPage,
-    QuestionCreatePage
+    QuestionsPage
   ],
   imports: [
     IonicPageModule.forChild(QuestionsPage)
   ],
   exports: [
-    QuestionsPage,
-    QuestionDetailsPage,
-    QuestionCreatePage
+    QuestionsPage
   ],
   entryComponents: [
-    QuestionDetailsPage,
-    QuestionCreatePage
+    QuestionsPage
   ],
   providers: [
     CategoriesProvider,

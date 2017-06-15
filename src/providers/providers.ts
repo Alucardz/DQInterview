@@ -1,11 +1,12 @@
+import { UserService } from './user.service';
 import { QuestionsProvider } from './questions';
-import { User } from './user';
+
 import { Api } from './api';
 import { Settings } from './settings';
 import { Items } from '../mocks/providers/items';
 
 export {
-User,
+UserService,
 Api,
 Settings,
 Items,

@@ -1,11 +1,11 @@
 import { JobTitle } from './../../models/jobTitle';
 import { jobTitlesProvider } from './../../providers/jobTitles';
 import { Answer } from './../../models/answer';
-import { InterviewsProvider } from './../../providers/interviews';
+import { InterviewService } from './../../providers/interview.service';
 import { Interview } from './../../models/interview';
 import { Question } from './../../models/question';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the InterviewPage page.
@@ -45,6 +45,12 @@ export class InterviewPage {
         });
         loading.dismiss();
       }
+    }).catch(err => {
+      debugger;
+      loading.dismiss()
+      this.toastCtrl.create({
+        message: err
+      }).present();
     });
   }
 
@@ -57,9 +63,10 @@ export class InterviewPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public InterviewService: InterviewsProvider,
+    public InterviewService: InterviewService,
     public JobTitlesService: jobTitlesProvider,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController) {
 
     let loading = this.loadingCtrl.create({
       content: 'Loading Please Wait...'

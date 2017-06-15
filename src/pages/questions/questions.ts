@@ -30,7 +30,7 @@ export class QuestionsPage {
   }
 
   openItem(q: Question) {
-    this.navCtrl.push('QuestionDetailsPage', {
+    this.navCtrl.push(QuestionDetailsPage, {
       q: q
     }).then( val =>
       this.updateQuestionsList()
@@ -38,7 +38,7 @@ export class QuestionsPage {
   }
 
   addQuestion() {
-    let addModal = this.modalCtrl.create('QuestionCreatePage');
+    let addModal = this.modalCtrl.create(QuestionCreatePage);
     addModal.onDidDismiss(item => {
       if (item) {
         this.questService.addQuestion(item).subscribe(
