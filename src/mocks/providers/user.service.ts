@@ -39,7 +39,7 @@ export class UserService {
    */
   login(accountInfo: any) {
     
-          this._loggedIn(res.json());
+          //this._loggedIn(res.json());
 
   }
 
