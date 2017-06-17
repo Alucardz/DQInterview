@@ -1,3 +1,7 @@
+import { Settings } from './providers/settings';
+
+import './polyfills.ts';
+
 import 'zone.js/dist/long-stack-trace-zone';
 import 'zone.js/dist/proxy.js';
 import 'zone.js/dist/sync-test';
@@ -8,6 +12,7 @@ import 'zone.js/dist/fake-async-test';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { getTestBed, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 // Ionic / Angular Providers:
 import {
@@ -47,6 +52,7 @@ getTestBed().initTestEnvironment(
 );
 // Then we find all the tests.
 const context: any = require.context('./', true, /\.spec\.ts$/);
+console.log(context)
 // And load the modules.
 context.keys().map(context);
 // Finally, start Karma to run the tests.
@@ -88,12 +94,15 @@ export class TestUtils {
         {provide: LoadingController, useClass: LoadingControllerMock},
         {provide: ModalController, useClass: ModalControllerMock},
         {provide: NavParams, useClass: NavParamsMock},
-        {provide: Platform, useClass: PlatformMock}
+        {provide: Platform, useClass: PlatformMock},
+        TranslateService,
+        Settings 
       ],
       imports: [
         FormsModule,
         IonicModule,
         ReactiveFormsModule,
+        TranslateModule
       ],
     });
   }
