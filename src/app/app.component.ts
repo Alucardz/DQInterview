@@ -15,40 +15,16 @@ import { TranslateService } from '@ngx-translate/core'
 //   <ion-title>Pages</ion-title>
 // </ion-toolbar>
 @Component({
-  template: `<ion-menu [content]="content">
-    <ion-header>
-      <ion-item>
-        <ion-avatar item-start>
-          <img style="border-radius: 75%" src="assets/img/avatar.gif">
-        </ion-avatar>
-        <h2>{{loggedInUser?.DisplayName}}</h2>
-        <p>{{loggedInUser?.Email}}</p>
-        <ion-note item-end>3:43 pm</ion-note>
-      </ion-item>
-    </ion-header>
-
-    <ion-content>
-      
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
-      </ion-list>
-    </ion-content>
-
-  </ion-menu>
+  template: `
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
   rootPage: any = FirstRunPage;
-  loggedInUser: User;
+
 
   @ViewChild(Nav) nav: Nav;
 
-  pages: any[] = [
-    { title: 'Questions', component: QuestionsPage },
-    { title: 'Interview', component: InterviewPage }
-  ]
+
 
   constructor(private translate: TranslateService, 
                       platform: Platform, 
@@ -59,7 +35,7 @@ export class MyApp {
                       userSvc: UserService) {
 
     
-    userSvc.User.subscribe(u => this.loggedInUser = u);
+    
     this.initTranslate();
 
     platform.ready().then(() => {
@@ -86,9 +62,5 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
+  
 }

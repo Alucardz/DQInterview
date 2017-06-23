@@ -1,3 +1,4 @@
+import { UserService } from './../../mocks/providers/user.service';
 import { jobTitlesProvider } from './../../providers/jobTitles';
 import { InterviewAnswerComponent } from './components/interview-answer';
 import { InterviewService } from './../../providers/interview.service';
@@ -18,6 +19,6 @@ import { InterviewPage } from './interview';
   exports: [
     InterviewPage
   ],
-  providers: [InterviewService, jobTitlesProvider]
+  providers: [UserService, InterviewService, jobTitlesProvider]
 })
 export class InterviewPageModule {}

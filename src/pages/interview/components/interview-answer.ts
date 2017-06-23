@@ -8,16 +8,17 @@ import { Component, Input, Output, EventEmitter, ElementRef, ViewChildren, Query
  * Generated class for the InterviewAnswerComponent component.
  *
  * See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
- * for more info on Angular Components.
+ * for more info on Angular Components. 
+ *  [@answerState]="(answerIndex == selectedAnswer?.AnswerIndex?'active':'inactive')"
  */
 @Component({
   selector: 'interview-answer',
   template: `
-      <button class="round-button" [@answerState]="(answerIndex == selectedAnswer?.AnswerIndex?'active':'inactive')" ion-item (click)="toggleComment(comment)" style="width: 98%">
+      <button class="round-button"  ion-item (click)="toggleComment(comment)" style="width: 98%">
         <ion-icon [name]="icons[answerIndex]" item-left ></ion-icon>
           {{answerText}}
       </button>
-      <ion-item style="width: 98%" [@commentState]="(answerIndex == selectedAnswer?.AnswerIndex?'active':'inactive')" *ngIf="answerIndex == selectedAnswer?.AnswerIndex" > 
+      <ion-item style="width: 98%" [@commentState]="(answerIndex == selectedAnswer?.AnswerIndex?'active':'inactive')" *ngIf="(answerIndex == selectedAnswer?.AnswerIndex)" > 
         <ion-textarea  #comment type="text" (ngModelChange)="selectedAnswer.Comment = $event" [ngModel]="selectedAnswer?.Comment" clearInput></ion-textarea>
       </ion-item>
   `, animations: [
@@ -35,7 +36,7 @@ import { Component, Input, Output, EventEmitter, ElementRef, ViewChildren, Query
         'box-shadow': '10px -10px 10px #888888',
         'margin-top': '20px'
       })),
-      transition('inactive <=> active', animate('500ms ease-out')),
+      transition('inactive <=> active', animate('500ms ease-out'))
     ]),
     trigger('commentState', [
       state('inactive', style({
@@ -61,16 +62,14 @@ import { Component, Input, Output, EventEmitter, ElementRef, ViewChildren, Query
     ])
   ]
 })
-//<!--  -->
+//<!-- <!--   --> -->
 export class InterviewAnswerComponent {
-  @Input() answerIndex: number;
+  @Input() answerIndex: number = 0;
   @Input() answerText: string;
   @Input() selectedAnswer: Answer;
   @Output() commentChange: EventEmitter<String> = new EventEmitter<String>();
 
-  // answerState: Observable<string> = Observable.combineLatest(this.answerText, this.selectedAnswer)
-  // .map(values => (values[0] === values[1].AnswerIndex?'':''))
-
+  animationState: string = 'inactive';
 
   icons: string[] = ['thumbs-down', 'thumbs-up', 'happy', 'ribbon']
   Txt_Comment: ElementRef;
@@ -88,16 +87,25 @@ export class InterviewAnswerComponent {
 
   }
 
+  ngOnInit() {
+    
+  }
+
   toggleComment(commentInput: ElementRef) {
     debugger;
     if (this.selectedAnswer.AnswerIndex != this.answerIndex) {
       this.selectedAnswer.Comment = "";
       this.selectedAnswer.AnswerIndex = this.answerIndex;
+      
     }
     else {
       if (this.Txt_Comment) {
         this.Txt_Comment.nativeElement.querySelector('textarea').focus();
       }
-    }
+    }  
+    // setTimeout(() => {
+    //   this.animationState = (this.answerIndex == this.selectedAnswer.AnswerIndex?'active':'inactive')
+    // }, 1000);  
+    //
   }
 }

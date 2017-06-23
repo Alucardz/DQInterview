@@ -39,10 +39,10 @@ export class LoginPage {
     this.userSvc.login(this.account).subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
-      this.navCtrl.push(MainPage);
+      //this.navCtrl.push(MainPage);
       // Unable to log in
       let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
+        message: err.message,
         duration: 3000,
         position: 'top'
       });

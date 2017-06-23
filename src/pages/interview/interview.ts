@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { JobTitle } from './../../models/jobTitle';
 import { jobTitlesProvider } from './../../providers/jobTitles';
 import { Answer } from './../../models/answer';
@@ -19,7 +20,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ToastController
   templateUrl: 'interview.html'
 })
 export class InterviewPage {
-  questionList: Question[] = [];
+  questionList$: Observable<Question[]>;
   answerList: Answer[] = [];
   jobTitles: JobTitle[] = [];
 
@@ -36,22 +37,15 @@ export class InterviewPage {
     });
     loading.present();
     //todo: replace 1 with jobOpening (from combo?)
-    this.InterviewService.GetQuestions(1).then(data => {
-      this.questionList = data;
-      if (this.questionList.length > 0) {
-        debugger
-        this.questionList.forEach(q => {
-          this.answerList.push(new Answer({}));
-        });
-        loading.dismiss();
-      }
-    }).catch(err => {
-      debugger;
-      loading.dismiss()
-      this.toastCtrl.create({
-        message: err
-      }).present();
-    });
+
+    //this.answerList$ = this.questionList$.switchMap(qList => );
+    this.InterviewService.GetQuestions(1).subscribe((qList) => {
+        qList.forEach(q => this.answerList.push(new Answer({})))
+      }, err => {
+        alert(err)
+        }, () => {
+        loading.dismiss()
+    })
   }
 
   InterviewObj: Interview;
@@ -77,9 +71,16 @@ export class InterviewPage {
       this.jobTitles = jobTitles;
       loading.dismiss();
     })
+
+
   }
 
-  ionViewDidLoad() {
+  log(q: Question) {
+    console.log(q);
+  }
+
+  ngOnInit() {
+    this.questionList$ = this.InterviewService.questions$;
 
   }
 
@@ -88,7 +89,7 @@ export class InterviewPage {
     return false;
   }
 
-  
+
 
   ngAfterViewInit() {
     debugger;

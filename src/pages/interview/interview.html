@@ -16,14 +16,14 @@
       <ion-option *ngFor="let j of jobTitles" [value]="j">{{j}}</ion-option>
     </ion-select>
   </ion-item>
-  <ion-slides (ionSlideNextStart)="beforeNextSlide($event)" *ngIf="questionList.length > 0" #slides pager paginationType="progress">
+  <ion-slides (ionSlideNextStart)="beforeNextSlide($event)" *ngIf="(questionList$ | async) as questionList" #slides pager paginationType="progress">
     <ion-slide *ngFor="let q of questionList; let qi = index">
       <ion-card>
         <ion-card-header>
           <h1>{{q?.QuestionText}}</h1>
         </ion-card-header>
         <ion-list>
-          <ion-item *ngFor="let ans of q?.AllAnswers; let i = index">
+          <ion-item *ngFor="let ans of q.AllAnswers; let i = index">
             <interview-answer #AnswersContainer [(selectedAnswer)]="answerList[qi]" [answerText]="ans" [answerIndex]="i">
             </interview-answer>
           </ion-item>

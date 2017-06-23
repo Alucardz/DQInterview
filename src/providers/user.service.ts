@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs/Rx';
 import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
@@ -28,7 +29,7 @@ import { Subject } from "rxjs/Subject";
  */
 @Injectable()
 export class UserService {
-  private _user: Subject<User> = new Subject<User>();
+  private _user: BehaviorSubject<User> = new BehaviorSubject<User>(new User({}));
 
   constructor(public http: Http, public api: Api) {
   }
@@ -37,25 +38,29 @@ export class UserService {
    * Send a POST request to our login endpoint with the data
    * the user entered on the form.
    */
-  login(accountInfo: any) {
-    let seq = this.api.post('Login/Login', accountInfo).share();
+  login(accountInfo: any) : Observable<User> {
+    return this.api.post('Login/Login', accountInfo)
+            .map(res => res.json())
+            .do(user => console.log(user))
+            .do(user => this._user.next(user))
+            .publishLast().refCount();
 
-    seq
-      // .map(res => {
-      //   debugger;
-      //   return res.json();
-      // })
-      .subscribe(res => {
-        // If the API returned a successful response, mark the user as logged in
-        if (res.ok) {
-          this._loggedIn(res.json());
-        } else {
-        }
-      }, err => {
-        console.error('ERROR', err);
-      });
+    // seq
+    //   // .map(res => {
+    //   //   debugger;
+    //   //   return res.json();
+    //   // })
+    //   .subscribe(res => {
+    //     // If the API returned a successful response, mark the user as logged in
+    //     if (res.ok) {
+    //       this._loggedIn(res.json());
+    //     } else {
+    //     }
+    //   }, err => {
+    //     console.error('ERROR', err);
+    //   });
 
-    return seq;
+    //return seq;
   }
 
   /**
